@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BoidsFlocking : MonoBehaviour
 {
-    public Vector3 OptimalDirection;
+    private Vector3 OptimalDirection;
     //optimaldirection = average position where there is space without colliding with other boid and sum of average direction all boids are moving
     public int speed = 5;
     public int directCohesionDist = 50;
@@ -12,15 +12,16 @@ public class BoidsFlocking : MonoBehaviour
     public float seperationDist = 10;
     public float maxSpeed = 10f;
     public Vector3 seperationAve;
-    public Rigidbody rb;
+    private Rigidbody rb;
 
     public float cohesionMult = 2f;
     public float seperationMult = 0.2f;
 
-    public GameObject BoidController;
+    private BoidController Player;
     private void Start()
     {
-        BoidController = FindObjectOfType<BoidController>().gameObject;
+        Player = FindObjectOfType<BoidController>();
+        rb = this.GetComponent<Rigidbody>();
     }
     void Update()
     {
@@ -33,11 +34,15 @@ public class BoidsFlocking : MonoBehaviour
         seperationAve = Vector3.zero;
         foreach (BoidsFlocking bo in boids)
         {
+            if((Player.transform.position - this.transform.position).magnitude > Player.flockRange)
+            {
+                OptimalDirection += DirectionalCohesion(bo.gameObject);
+            }
 
-            OptimalDirection += DirectionalCohesion(bo);
+
             if (bo != this)
             {
-                //check if each boid is too close to another boid and the direction itr should go
+                //check if each boid is too close to another boid and the direction it should go
                 
                 if((bo.transform.position - this.transform.position).magnitude < seperationDist)
                 {
@@ -46,9 +51,14 @@ public class BoidsFlocking : MonoBehaviour
             }
         }
         OptimalDirection /= boids.Length;
+        if ((Player.transform.position - this.transform.position).magnitude < Player.flockRange)
+        {
+            OptimalDirection = DirectionalCohesion(Player.gameObject);
+            
+        }
         //OptimalDirection -= this.transform.position;
-        seperationAve/= boids.Length;
-        Vector3 desiredVelocity = seperationAve*seperationMult + (OptimalDirection*cohesionMult / (directCohesionDist)) * speed;
+        seperationAve /= boids.Length;
+        Vector3 desiredVelocity = (seperationAve*seperationMult + (OptimalDirection*cohesionMult)) * speed;//+ this.transform.forward
         rb.velocity = Vector3.ClampMagnitude(desiredVelocity, maxSpeed);
         transform.LookAt(transform.position+rb.velocity);
     }
@@ -60,9 +70,9 @@ public class BoidsFlocking : MonoBehaviour
         Seperate.z = (Seperate.z == 0) ? 0 : 1 / (Seperate.z/seperationDist);
         return Seperate;
     }
-    public Vector3 DirectionalCohesion(BoidsFlocking b)
+    public Vector3 DirectionalCohesion (GameObject b)
     {
-        Vector3 directCohesion = (b.transform.position - this.transform.position) + (b.transform.forward * directCohesionDist);
+        Vector3 directCohesion = (b.transform.position  + (b.transform.forward * directCohesionDist))-this.transform.position;
         return directCohesion;
 
     }
