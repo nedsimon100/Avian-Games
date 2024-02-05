@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,7 +13,7 @@ public class BoidController : MonoBehaviour
     private float Xinp;
     private float Yinp;
 
-
+    public bool dead = false;
     void Update()
     {
 
@@ -37,24 +38,51 @@ public class BoidController : MonoBehaviour
         
 
     }
+    private void shoot()
+    {
+        if (Input.GetButtonDown("Space"))
+        {
+            BoidsFlocking[] boids = FindObjectsOfType<BoidsFlocking>();
+            foreach (BoidsFlocking bo in boids)
+            {
 
+
+                if ((bo.transform.position - this.transform.position).magnitude < flockRange)
+                {
+                    bo.firing = true;
+                    return;
+                }
+                
+            }
+        }
+    }
     private void setPos() 
     {
         BoidsFlocking[] boids = FindObjectsOfType<BoidsFlocking>();
         Vector3 AvePos = Vector3.zero;
+        bool noBirds = true;
+        int boidsInRange = 0;
         foreach (BoidsFlocking bo in boids)
         {
-            if (bo != this)
-            {
-                //check if each boid is too close to another boid and the direction itr should go
 
-                if ((bo.transform.position - this.transform.position).magnitude < flockRange)
-                {
-                    AvePos += bo.transform.position;
-                }
+            if ((bo.transform.position - this.transform.position).magnitude < flockRange)
+            {
+                AvePos += bo.transform.position;
+                noBirds = false;
+                boidsInRange++;
             }
+            
         }
-        AvePos /= boids.Length;
+        flockRange = 10 + boidsInRange * 3;
+        if (noBirds)
+        {
+            //Game Over
+        }
+        else
+        {
+            AvePos /= boidsInRange;
+        }
+
 
         this.transform.position = AvePos;
     }

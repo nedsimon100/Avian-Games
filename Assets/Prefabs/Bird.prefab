@@ -147,13 +147,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a35195d321ca2142bd1d1eb24765d4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 0.9
   directCohesionDist: 30
-  seperationDist: 5
-  maxSpeed: 15
+  seperationDist: 20
+  maxSpeed: 20
   seperationAve: {x: 0, y: 0, z: 0}
-  cohesionMult: 5
-  seperationMult: 10
+  playerSpeed: 2
+  cohesionMult: 2
+  seperationMult: 5
+  firing: 0
+  shootSpeed: 88
 --- !u!1 &7679046732018499189
 GameObject:
   m_ObjectHideFlags: 0

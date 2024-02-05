@@ -14,7 +14,7 @@ public class ProceduralTerrain : MonoBehaviour
     public float offsetY = 100f;
 
     public float speedDiv;
-
+    
     public int depth = 20;
     public int width = 200;
     public int height = 200;
