@@ -13,6 +13,8 @@ public class ProceduralTerrain : MonoBehaviour
     public float offsetX = 100f;
     public float offsetY = 100f;
 
+    public float speedDiv;
+
     public int depth = 20;
     public int width = 200;
     public int height = 200;
@@ -29,14 +31,14 @@ public class ProceduralTerrain : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        this.transform.position = new Vector3(Player.transform.position.x-(width/2),0, Player.transform.position.y-(height / 2));
+        this.transform.position = new Vector3(Player.transform.position.x-(width/2),0, Player.transform.position.z-(height / 2));
         Terrain terrain = GetComponent<Terrain>();
         terrain.terrainData = GenerateTerrain(terrain.terrainData);
     }
 
     TerrainData GenerateTerrain(TerrainData terrainData)
     {
-        terrainData.heightmapResolution = width;
+        terrainData.heightmapResolution = width+1;
 
         terrainData.size = new Vector3(width, depth, height);
 
@@ -55,7 +57,7 @@ public class ProceduralTerrain : MonoBehaviour
             for (int y = 0; y < height; y++)
             {
                 heights[x, y] = CalculateHeight(x, y)*mult;
-               // Debug.Log("Height at (" + x + "," + y + ")  --  " + heights[x, y]);
+                //Debug.Log("Height at (" + x + "," + y + ")  --  " + heights[x, y]);
             }
         }
         return heights;
@@ -63,8 +65,8 @@ public class ProceduralTerrain : MonoBehaviour
 
     float CalculateHeight(int x, int y)
     {
-        float xCoord = (float)transform.position.x + offsetX + (scale * (x / width));
-        float yCoord = (float)transform.position.y + offsetY + (scale * (y / height));
+        float xCoord = transform.position.z/speedDiv + offsetX + (scale * ((float)x / width));      // what should i multiply or divide the position by so that the terrain changes as it moves seemlessly
+        float yCoord = transform.position.x/speedDiv + offsetY + (scale * ((float)y / height));     // what should i multiply or divide the position by so that the terrain changes as it moves seemlessly
 
         return Mathf.PerlinNoise(xCoord, yCoord);
     }
