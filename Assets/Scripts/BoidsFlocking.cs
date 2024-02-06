@@ -26,7 +26,7 @@ public class BoidsFlocking : MonoBehaviour
     public float speedDiv = 20;
     private void Start()
     {
-        LifeTime = Random.Range(20f, 40f);
+        LifeTime = Random.Range(10f, 20f);
         maxLife = LifeTime;
         Player = FindObjectOfType<BoidController>();
         rb = this.GetComponent<Rigidbody>();
@@ -47,7 +47,8 @@ public class BoidsFlocking : MonoBehaviour
         {
             if (LifeTime <= 0f)
             {
-                Destroy(this.gameObject);
+                rb.useGravity = true;
+                Destroy(this);
             }
             yield return new WaitForSeconds(0.01f);
             LifeTime -= 0.01f;

@@ -13,7 +13,7 @@ public class BoidController : MonoBehaviour
 
     public float torque =0.5f;
 
-    public float flockRange = 20;
+    public float flockRange = 20f;
     public float playerSpeedDiv = 15;
     private float Xinp;
     private float Yinp;
@@ -22,6 +22,7 @@ public class BoidController : MonoBehaviour
     private void Start()
     {
         restartButton.SetActive(false);
+        Time.timeScale = 1f;
     }
     void Update()
     {
@@ -67,7 +68,7 @@ public class BoidController : MonoBehaviour
             }
             
         }
-        flockRange = 10 + boidsInRange * 3;
+        flockRange = 10+(boidsInRange/2);
         if (noBirds)
         {
             restartButton.SetActive(true);
