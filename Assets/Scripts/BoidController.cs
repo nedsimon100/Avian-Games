@@ -14,7 +14,7 @@ public class BoidController : MonoBehaviour
     public float torque =0.5f;
 
     public float flockRange = 20;
-
+    public float playerSpeedDiv = 15;
     private float Xinp;
     private float Yinp;
 
@@ -72,15 +72,17 @@ public class BoidController : MonoBehaviour
         {
             restartButton.SetActive(true);
             Time.timeScale = 0f;
+
         }
         else
         {
             AvePos /= boidsInRange;
+            birdCounter.text = boidsInRange.ToString();
+            DistanceCounter.text = Mathf.FloorToInt(this.transform.position.z).ToString();
+            this.transform.position = AvePos;
         }
 
-        birdCounter.text = boidsInRange.ToString();
-        DistanceCounter.text = Mathf.FloorToInt(this.transform.position.z).ToString();
-        this.transform.position = AvePos;
+        
     }
 
 }

@@ -149,15 +149,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0.15
   directCohesionDist: 30
-  seperationDist: 20
+  seperationDist: 30
   maxSpeed: 30
   seperationAve: {x: 0, y: 0, z: 0}
   playerSpeed: 2
-  cohesionMult: 2
-  seperationMult: 3
+  cohesionMult: 1
+  seperationMult: 7
   LifeTime: 30
   firing: 0
   shootSpeed: 88
+  speedDiv: 15
 --- !u!1 &7679046732018499189
 GameObject:
   m_ObjectHideFlags: 0

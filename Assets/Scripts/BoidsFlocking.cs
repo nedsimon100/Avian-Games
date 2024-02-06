@@ -23,6 +23,7 @@ public class BoidsFlocking : MonoBehaviour
     private float maxLife;
     private Color fullHealthColor = Color.white;
     private Color zeroHealthColor = Color.black;
+    public float speedDiv = 20;
     private void Start()
     {
         LifeTime = Random.Range(20f, 40f);
@@ -100,12 +101,14 @@ public class BoidsFlocking : MonoBehaviour
         if ((Player.transform.position - this.transform.position).magnitude < Player.flockRange)
         {
             OptimalDirection = DirectionalCohesion(Player.gameObject);
-           // speed = playerSpeed;
+            speedDiv = Player.playerSpeedDiv;
         }
         
         seperationAve /= boids.Length;
-        Vector3 desiredVelocity = (seperationAve * seperationMult) + (OptimalDirection * cohesionMult) * speed;
-        rb.velocity = Vector3.ClampMagnitude(desiredVelocity, maxSpeed);
+        //Vector3 desiredVelocity = (seperationAve * seperationMult) + (OptimalDirection * cohesionMult) * speed;
+        //rb.velocity = Vector3.ClampMagnitude(desiredVelocity, maxSpeed);
+        seperationAve = Vector3.ClampMagnitude(seperationAve, OptimalDirection.magnitude+10);
+        rb.velocity = ((seperationAve * seperationMult) + (OptimalDirection * cohesionMult)) / speedDiv;
         transform.LookAt(transform.position+rb.velocity);
     }
     public Vector3 Seperation(BoidsFlocking b)

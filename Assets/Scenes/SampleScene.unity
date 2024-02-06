@@ -470,6 +470,7 @@ MonoBehaviour:
   restartButton: {fileID: 2046848742}
   torque: 2
   flockRange: 10
+  playerSpeedDiv: 10
   dead: 0
 --- !u!23 &437415987
 MeshRenderer:
