@@ -16,17 +16,45 @@ public class BoidsFlocking : MonoBehaviour
     public float playerSpeed = 2;
     public float cohesionMult = 2f;
     public float seperationMult = 0.2f;
-
+    public float LifeTime = 30;
     public bool firing = false;
     public float shootSpeed = 20f;
     private BoidController Player;
+    private float maxLife;
+    private Color fullHealthColor = Color.white;
+    private Color zeroHealthColor = Color.black;
     private void Start()
     {
+        LifeTime = Random.Range(20f, 40f);
+        maxLife = LifeTime;
         Player = FindObjectOfType<BoidController>();
         rb = this.GetComponent<Rigidbody>();
+        StartCoroutine(timeTillDeath());
+    }
+    void UpdateColor()
+    {
+        
+        float healthPercentage = LifeTime / maxLife;
+
+        Color lerpedColor = Color.Lerp(zeroHealthColor, fullHealthColor, healthPercentage);
+
+        this.GetComponent<Renderer>().material.color = lerpedColor;
+    }
+    IEnumerator timeTillDeath()
+    {
+        while (true)
+        {
+            if (LifeTime <= 0f)
+            {
+                Destroy(this.gameObject);
+            }
+            yield return new WaitForSeconds(0.01f);
+            LifeTime -= 0.01f;
+        }
     }
     void Update()
     {
+        UpdateColor();
         if(!firing)
         {
             move();

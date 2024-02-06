@@ -1,10 +1,15 @@
 using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class BoidController : MonoBehaviour
 {
+    public TextMeshProUGUI birdCounter;
+    public TextMeshProUGUI DistanceCounter;
+
+    public GameObject restartButton;
 
     public float torque =0.5f;
 
@@ -14,11 +19,17 @@ public class BoidController : MonoBehaviour
     private float Yinp;
 
     public bool dead = false;
+    private void Start()
+    {
+        restartButton.SetActive(false);
+    }
     void Update()
     {
 
+        
         GetInputs();
         setPos();
+        
     }
 
     // Update is called once per frame
@@ -38,24 +49,7 @@ public class BoidController : MonoBehaviour
         
 
     }
-    private void shoot()
-    {
-        if (Input.GetButtonDown("Space"))
-        {
-            BoidsFlocking[] boids = FindObjectsOfType<BoidsFlocking>();
-            foreach (BoidsFlocking bo in boids)
-            {
-
-
-                if ((bo.transform.position - this.transform.position).magnitude < flockRange)
-                {
-                    bo.firing = true;
-                    return;
-                }
-                
-            }
-        }
-    }
+    
     private void setPos() 
     {
         BoidsFlocking[] boids = FindObjectsOfType<BoidsFlocking>();
@@ -76,14 +70,16 @@ public class BoidController : MonoBehaviour
         flockRange = 10 + boidsInRange * 3;
         if (noBirds)
         {
-            //Game Over
+            restartButton.SetActive(true);
+            Time.timeScale = 0f;
         }
         else
         {
             AvePos /= boidsInRange;
         }
 
-
+        birdCounter.text = boidsInRange.ToString();
+        DistanceCounter.text = Mathf.FloorToInt(this.transform.position.z).ToString();
         this.transform.position = AvePos;
     }
 

@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b2db86121404754db890f4c8dfe81b2, type: 3}
   m_Name: Bloom
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   skipIterations:
     m_OverrideState: 0
     m_Value: 1
   threshold:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 1
   intensity:
     m_OverrideState: 1
@@ -80,13 +80,13 @@ MonoBehaviour:
     m_Value: 9
   aperture:
     m_OverrideState: 1
-    m_Value: 5.7
+    m_Value: 6.4
   focalLength:
     m_OverrideState: 1
     m_Value: 119
   bladeCount:
     m_OverrideState: 1
-    m_Value: 7
+    m_Value: 8
   bladeCurvature:
     m_OverrideState: 1
     m_Value: 1
@@ -136,7 +136,7 @@ MonoBehaviour:
   active: 1
   intensity:
     m_OverrideState: 1
-    m_Value: 0.76
+    m_Value: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,6 +156,32 @@ MonoBehaviour:
   - {fileID: 1739614162612670924}
   - {fileID: -7061680155773585968}
   - {fileID: -1727249397774794520}
+  - {fileID: 1038657563371140274}
+--- !u!114 &1038657563371140274
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29fa0085f50d5e54f8144f766051a691, type: 3}
+  m_Name: FilmGrain
+  m_EditorClassIdentifier: 
+  active: 1
+  type:
+    m_OverrideState: 1
+    m_Value: 0
+  intensity:
+    m_OverrideState: 1
+    m_Value: 0.409
+  response:
+    m_OverrideState: 1
+    m_Value: 1
+  texture:
+    m_OverrideState: 1
+    m_Value: {fileID: 0}
 --- !u!114 &1739614162612670924
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -205,10 +231,10 @@ MonoBehaviour:
     m_Value: 19
   colorFilter:
     m_OverrideState: 1
-    m_Value: {r: 0.6792453, g: 0.43040952, b: 0.11854753, a: 1}
+    m_Value: {r: 0.6784314, g: 0.37879393, b: 0.11764707, a: 1}
   hueShift:
     m_OverrideState: 1
-    m_Value: -2
+    m_Value: -0
   saturation:
     m_OverrideState: 1
-    m_Value: 62
+    m_Value: 72

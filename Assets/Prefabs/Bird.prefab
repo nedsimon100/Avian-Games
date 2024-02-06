@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7560451722748952443}
   m_Layer: 0
   m_Name: Bird
-  m_TagString: Untagged
+  m_TagString: Bird
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -65,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 2f7b29657dce7ab42828c25bd39c7305, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -147,14 +147,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a35195d321ca2142bd1d1eb24765d4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.9
+  speed: 0.15
   directCohesionDist: 30
   seperationDist: 20
-  maxSpeed: 20
+  maxSpeed: 30
   seperationAve: {x: 0, y: 0, z: 0}
   playerSpeed: 2
   cohesionMult: 2
-  seperationMult: 5
+  seperationMult: 3
+  LifeTime: 30
   firing: 0
   shootSpeed: 88
 --- !u!1 &7679046732018499189
@@ -186,7 +187,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.5}
-  m_LocalScale: {x: 0.1, y: 1, z: 1}
+  m_LocalScale: {x: 0.1, y: 0.9, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6632219219523450682}
@@ -219,7 +220,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 2f7b29657dce7ab42828c25bd39c7305, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

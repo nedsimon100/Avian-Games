@@ -16,8 +16,11 @@ public class BirdSpawner : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(Random.Range(3f, 10f));
-            Instantiate(Birds[Random.Range(0,Birds.Count-1)],new Vector3(Random.Range(Player.transform.position.x-100, Player.transform.position.x + 100), Random.Range(50,150), Random.Range(Player.transform.position.x - 100, Player.transform.position.x + 100)),Quaternion.identity);
+            yield return new WaitForSeconds(Random.Range(5f, 13f));
+            float offsetX = Random.Range(-75f, 75f);
+            float offsetZ = Random.Range(-75f, 120f);
+            Vector3 spawnPosition = new Vector3(Player.transform.position.x + offsetX, Random.Range(60f, 80f), Player.transform.position.z + offsetZ);
+            Instantiate(Birds[Random.Range(0, Birds.Count)], spawnPosition, Quaternion.identity);
         }
     }
 }
